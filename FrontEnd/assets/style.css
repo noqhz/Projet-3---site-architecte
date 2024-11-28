@@ -15,7 +15,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, button {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -125,6 +125,35 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+/* boutons filtres */
+
+.filtres {
+    display: flex;
+	justify-content: center;
+	margin-bottom: 40px;
+    gap: 10px;
+}
+
+.filtres button {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 20px;
+    padding: 10px 20px;
+    border: 2px solid #1D6154;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #1D6154;
+    cursor: pointer;
+}
+
+.filtres button:hover {
+    background-color: #1D6154;
+    color: white;
+}
+
+/*  */
+
 .gallery {
 	width: 100%;
 	display: grid;
