@@ -9,16 +9,16 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="./scripts/gallerie.js" defer></script>
+	<script type="module" src="./scripts/works.js" defer></script>
 </head>
 <body>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
+			<li><a href="./index.html">projets</a></li>
+			<li><a href="#contact">contact</a></li>
+			<li><a href="./login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -38,10 +38,7 @@
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
 		<div class="filtres">
-			<button class="btn-tous">Tous</button>
-			<button class="btn-objets">Objets</button>
-			<button class="btn-apparts">Appartements</button>
-			<button class="btn-hotels">Hotels & restaurants</button>
+			
 		</div>
 		<div class="gallery">
 
@@ -52,11 +49,11 @@
 		<p>Vous avez un projet ? Discutons-en !</p>
 		<form action="#" method="post">
 			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
+			<input type="text" name="name" id="name" autocomplete="name">
+			<label for="email">E-mail</label>
+			<input type="email" name="email" id="email" autocomplete="email">
 			<label for="message">Message</label>
-			<textarea name="message" id="message" cols="30" rows="10"></textarea>
+			<textarea name="message" id="message" cols="30" rows="10" autocomplete="on"></textarea>
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
