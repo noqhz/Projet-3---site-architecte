@@ -26,7 +26,7 @@ form.addEventListener("submit", async (event) => {
     console.log("mail saisi : ", email);
     console.log("password saisi : ", password);
 
-    if (!email || !password) { // vérifie si l'une des deux variables est fausse
+    if (!email || !password) { // vérifie si l'une des deux variables est absente
         messageErreur.textContent = "Veuillez remplir tous les champs";
         return;
     }
@@ -40,29 +40,23 @@ form.addEventListener("submit", async (event) => {
             body: JSON.stringify({ email, password }) // transforme objet JavaScript en chaîne JSON (ici l'e-mail et le mot de passe)
         });
 
-        if (response.ok) {
+        if (response.ok) { // succès (codes de statut compris entre 200 et 299)
             const element = await response.json();
-            localStorage.setItem("token", element.token); // stocke le token dans le localStorage
+            sessionStorage.setItem("token", element.token); // stocke le token dans le sessionStorage
             window.location.href = "./index.html"; // redirection vers la page d'accueil
-            console.log("utilisateur authentifié, token stocké dans localStorage");
-        } else if (response.status === 401) { // else if pour vérifier la condition spécifique response.status === 401
+            console.log("utilisateur authentifié, token stocké dans sessionStorage");
+        } else { // else en cas d'erreur 401 = Unauthorized ou 404 = User not found
             messageErreur.textContent = "Erreur dans l'identifiant ou le mot de passe";
-        } else { // else pour tous les cas qui ne correspondent pas à la condition précédente (ni 200 = succès, ni 401 = Unauthorized)
-            messageErreur.textContent = "Une erreur est survenue. Veuillez réessayer";
         }
     } catch (error) { // pour gérer une erreur si une exception se produit dans le bloc try
-        messageErreur.textContent = "Erreur connexion serveur."; // erreur réseau/serveur/configuration url
+        messageErreur.textContent = "Erreur connexion"; // erreur réseau/serveur/configuration url
         console.error("Détail erreur :", error); // détails techniques de l'erreur
     }
 });
 
+// sessionStorage : données conservées tant que l'onglet est ouvert
+// données temporaires spécifiques à une session utilisateur sans risque de persistance
+// protection des données contre l'accès dans d'autres onglets
 
-// test token dans localStorage (temporaire)
-
-const token = localStorage.getItem("token");
-
-if (token) {
-console.log("Le token est présent :", token);
-} else {
-console.log("Pas de token d'authentification");
-}
+// localStorage : données stockées après fermeture onglet/navigateur (supprimées qmanuellement ou via le code)
+// pour données persistantes à réutiliser, comme des préférences utilisateur

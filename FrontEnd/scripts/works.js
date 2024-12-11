@@ -73,26 +73,41 @@ function ajoutBoutonFiltre(btnFiltre) {
 
 // affichage dynamique des images depuis le backend
 
-function afficherImages(getworks) {
-    const divGallery = document.querySelector(".gallery"); // container html pour afficher les travaux
-    divGallery.innerHTML = ''; // vide le contenu (ici la gallerie d'images) pour éviter d'afficher les images plusieurs fois
+export function afficherImages(getworks, containerSelector) {
+
+    const contenuTravaux = document.querySelector(containerSelector); // container html pour afficher les travaux
+    contenuTravaux.innerHTML = ''; // vide le contenu (ici la gallerie d'images) pour éviter d'afficher les images plusieurs fois
 
     getworks.forEach(figure => {
         // créer les éléments HTML
         const travauxElement = document.createElement("figure"); // balise figure pour l'image et sa description
-        const imgElement = document.createElement("img"); // balises img = contenu img de figure
+        travauxElement.id = `work-${figure.id}`; // ex: "work-1"
+        const imgElement = document.createElement("img"); // balise img = contenu img de figure
         imgElement.src = figure.imageUrl;
         imgElement.alt = figure.title;
 
-        const captionElement = document.createElement("figcaption"); // balises figcaption = contenu texte de figure
-        captionElement.innerText = figure.title;
-
         // déclaration élément parent dans DOM (div gallery > figure)
-        divGallery.appendChild(travauxElement);
-        // déclaration élément parent dans DOM (figure > img + caption)
+        contenuTravaux.appendChild(travauxElement);
+        // déclaration élément parent dans DOM (figure > img)
         travauxElement.appendChild(imgElement);
-        travauxElement.appendChild(captionElement);
-        
+
+        if (containerSelector === ".gallery") {
+            const captionElement = document.createElement("figcaption"); // balise figcaption = contenu texte de figure
+            captionElement.innerText = figure.title;
+            travauxElement.appendChild(captionElement); // déclaration élément parent dans DOM (figure > caption)
+        }
+        if (containerSelector === ".modal-gallery") {
+            const deleteDiv = document.createElement("div");
+            deleteDiv.classList.add("delete-div");
+            travauxElement.appendChild(deleteDiv);
+            const deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete-button");
+            deleteButton.setAttribute("id", figure.id); // id de get/works lié à chaque bouton delete
+            deleteDiv.appendChild(deleteButton);
+            const deleteIcon = document.createElement("i");
+            deleteIcon.classList.add("fa-solid", "fa-trash-can");
+            deleteButton.appendChild(deleteIcon);
+        } 
     });
 }
 
@@ -101,5 +116,6 @@ function afficherImages(getworks) {
 
 const categories = tableauCategories(getworks); // liste des catégories uniques
 ajoutBoutonFiltre(categories); // crée les boutons de filtres
-afficherImages(getworks); // affiche toutes les images par défaut
+const galleryContainer = ".gallery";
+afficherImages(getworks, galleryContainer); // affiche toutes les images par défaut
 console.log("catégories uniques :", categories); // tableau Set avec catégories uniques

@@ -102,6 +102,7 @@ li:hover {
 #introduction {
 	display: flex;
 	align-items: center;
+	padding-bottom: 100px;
 }
 #introduction figure {
 	flex: 1
@@ -125,40 +126,8 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+	align-items: center;
 }
-
-/* boutons filtres */
-
-.filtres {
-    display: flex;
-	justify-content: center;
-	margin-bottom: 40px;
-    gap: 10px;
-}
-
-.filtres button {
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 20px;
-    padding: 10px 20px;
-    border: 2px solid #1D6154;
-    border-radius: 20px;
-    background-color: transparent;
-    color: #1D6154;
-    cursor: pointer;
-}
-
-.filtres button:hover {
-    background-color: #1D6154;
-    color: white;
-}
-
-.filtres button.active {
-    background-color: #1D6154;
-    color: white;
-}
-
-/* end boutons filtres */
 
 .gallery {
 	width: 100%;
@@ -170,23 +139,7 @@ li:hover {
 
 .gallery img {
 	width: 100%;
-
 }
-
-/*  */
-
-#login {
-	padding-top: 50px;
-	padding-bottom: 150px;
-}
-
-.login-error {
-    text-align: center;
-    padding-top: 20px;
-    color: #1D6154;
-}
-
-/*  */
 
 #contact, #login {
 	width: 50%;
@@ -233,18 +186,6 @@ input[type="submit"]{
 	cursor: pointer;
 }
 
-/*  */
-
-input[type="submit"]:hover {
-	opacity: 0.8;
-}
-
-input[type="submit"]:active {
-	opacity: 0.5;
-}
-
-/*  */
-
 nav a {
 	color: black;
 	text-decoration:none;
@@ -262,4 +203,265 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em;
+}
+
+/* mode admin */
+
+.bandeau-edition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.bandeau-edition i {
+	font-weight: 200;
+}
+
+.bandeau-edition p {
+    margin: 0;
+}
+
+.header-plus {
+  	padding-top: 50px; 
+}
+
+/*  lien boite modale */
+
+.h2-plus {
+	padding-bottom: 3em;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lien-modale {
+	margin-left: 30px;
+	font-size: 15px;
+	color: black;
+    text-decoration: none;
+	font-family: 'Work Sans';
+	font-weight: 100;
+}
+
+.lien-modale:hover {
+	color: #B1663C;
+}
+
+.lien-modale i {
+	font-weight: 100;
+	margin-right: 5px;
+}
+
+/* boutons filtres */
+
+.filtres {
+    display: flex;
+	justify-content: center;
+	margin-bottom: 40px;
+    gap: 10px;
+}
+
+.filtres button {
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 20px;
+    padding: 10px 20px;
+    border: 2px solid #1D6154;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #1D6154;
+    cursor: pointer;
+}
+
+.filtres button:hover {
+    background-color: #1D6154;
+    color: white;
+}
+
+.filtres button.active {
+    background-color: #1D6154;
+    color: white;
+}
+
+.filtres-off {
+	display: none;
+}
+
+/* formulaire login */
+
+#login {
+	padding-top: 50px;
+	padding-bottom: 150px;
+	text-align: center;
+}
+
+.login-error {
+    text-align: center;
+    padding-top: 20px;
+    color: #1D6154;
+}
+
+#login a:hover {
+	color: #B1663C;
+}
+
+input[type="submit"]:hover {
+	opacity: 0.8;
+}
+
+input[type="submit"]:active {
+	opacity: 0.5;
+}
+
+/*  boite modale */
+
+* {
+    box-sizing: border-box;
+}
+
+.modal {
+    position: fixed;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+	height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+	z-index: 1000;
+	animation: fadeIn .5s both;
+}
+
+.modal-hidden {
+	display: none;
+}
+
+.modal[aria-hidden="true"] {
+	animation-name: fadeOut;
+}
+
+.modal-wrapper1 {
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    width: 600px;
+	height: 700px;
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+    padding: 30px;
+    background-color: #fff;
+	border-radius: 15px;
+	animation: slideFromTop .5s both;
+}
+
+.modal[aria-hidden="true"] .modal-wrapper1 {
+	animation-name: slideToBottom;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@keyframes slideFromTop {
+	from { transform: translateY(-50px); }
+	to { transform: translateY(0px); }
+}
+
+@keyframes slideToBottom {
+	from { transform: translateY(0px); }
+	to { transform: translateY(50px); }
+}
+
+#titlemodal {
+	font-family: 'Work Sans';
+	font-size: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.js-modal-close {
+	align-self: flex-end;
+	background-color: white;
+	cursor: pointer;
+}
+
+.js-modal-close:hover {
+	opacity: 0.8;
+}
+
+.js-modal-close:active {
+	opacity: 0.5;
+}
+
+.js-modal-close span {
+	display: none;
+}
+
+.modal-gallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 30px;
+	margin: 30px;
+	padding: 0 50px;
+}
+
+.modal-gallery figure {
+	position: relative;
+}
+
+.modal-gallery img {
+	max-width: 100%;
+    height: auto; 
+	object-fit: contain;
+}
+
+.delete-div {
+	position: absolute;
+	top: 5px;
+    right: 5px;
+	display: inline-flex;
+	background-color: black;
+	justify-content: center;
+    align-items: center;
+	width: 22px;
+    height: 22px;
+	border-radius: 15%;
+	cursor: pointer;
+}
+
+.delete-button {
+	cursor: pointer;
+}
+
+.delete-div:hover {
+	opacity: 0.8;
+}
+
+.delete-div:active {
+	opacity: 0.5;
+}
+
+.fa-trash-can {
+	color: white;
+	background-color: black;
+    display: block;
 }
