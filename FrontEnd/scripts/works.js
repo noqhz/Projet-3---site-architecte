@@ -100,6 +100,3 @@ export function afficherImages(getworks, containerSelector) { // export pour uti
 const categories = tableauCategories(getworks); // liste des catégories uniques
 ajoutBoutonFiltre(categories); // crée les boutons de filtres
 afficherImages(getworks, ".gallery"); // affiche les travaux dans div gallery
-
-console.log("contenu de get/works :", getworks);
-console.log("catégories uniques :", categories);

@@ -3,13 +3,6 @@
 
 async function modeEdition() {
 
-    const token = sessionStorage.getItem("token");
-    if (token) {
-        console.log("token login : présent");
-    } else {
-        console.log("token login : absent");
-    }
-
     const response = await fetch('http://localhost:5678/api/works');
     const getworks = await response.json();
 
@@ -64,9 +57,7 @@ async function modeEdition() {
 
         const focusInModal = function (e) { // place le focus de Tab sur la boite modale
             e.preventDefault();
-            // console.log(focusables); // press Tab = affiche les éléments focusables dans la modale
             let index = focusables.findIndex(f => f === modal.querySelector(":focus"));
-            // console.log(index); // indique l'ordre des éléements focus dans la modale
             if (e.shiftKey === true) { // shift + Tab = retour sur le focus précédent
                 index--;
             } else {
@@ -126,7 +117,6 @@ async function modeEdition() {
                 if (!response.ok) {
                     throw new Error(`Erreur lors de la suppression : ${response.statusText}`);
                 }
-                console.log("Suppression ok");
 
                 // mise à jour affichage
                 document.querySelector(`#work-${figureDeleteId}`)?.remove();
@@ -211,10 +201,6 @@ async function modeEdition() {
             formData.append("title", titre);
             formData.append("category", parseInt(categorie));
 
-            console.log("Image:", file);
-            console.log("Titre:", titre);
-            console.log("Catégorie:", categorie);
-
             try {
                 const response = await fetch("http://localhost:5678/api/works", {
                     method: "POST",
@@ -226,7 +212,6 @@ async function modeEdition() {
                 });
 
                 if (response.ok) {
-                    console.log("Ajout réussi");
 
                     const newWork = await response.json(); // récupére objet ajouté
                     getworks.push(newWork); // ajoute nouvel envoi à getworks

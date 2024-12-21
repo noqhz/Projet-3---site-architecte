@@ -37,7 +37,6 @@ form.addEventListener("submit", async (event) => {
             const element = await response.json();
             sessionStorage.setItem("token", element.token); // stocke token dans sessionStorage
             window.location.href = "./index.html"; // redirection vers page d'accueil
-            console.log("utilisateur authentifié, token stocké dans sessionStorage");
         } else { // else en cas d'erreur 401 = Unauthorized ou 404 = User not found
             messageErreur.textContent = "Erreur dans l'identifiant ou le mot de passe";
         }
@@ -46,10 +45,3 @@ form.addEventListener("submit", async (event) => {
         console.error("Détail erreur :", error);
     }
 });
-
-const token = sessionStorage.getItem("token");
-if (token) {
-    console.log("token login : présent");
-} else {
-    console.log("token login : absent");
-}
