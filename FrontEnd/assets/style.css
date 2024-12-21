@@ -205,7 +205,7 @@ footer nav ul {
 	margin: 2em;
 }
 
-/* mode admin */
+/* mode édition */
 
 .bandeau-edition {
     position: fixed;
@@ -250,6 +250,7 @@ footer nav ul {
     text-decoration: none;
 	font-family: 'Work Sans';
 	font-weight: 100;
+	display: flex;
 }
 
 .lien-modale:hover {
@@ -304,7 +305,7 @@ footer nav ul {
 	text-align: center;
 }
 
-.login-error {
+.error-message {
     text-align: center;
     padding-top: 20px;
     color: #1D6154;
@@ -314,15 +315,15 @@ footer nav ul {
 	color: #B1663C;
 }
 
-input[type="submit"]:hover {
+#login input[type="submit"]:hover {
 	opacity: 0.8;
 }
 
-input[type="submit"]:active {
+#login input[type="submit"]:active {
 	opacity: 0.5;
 }
 
-/*  boite modale */
+/* boite modale */
 
 * {
     box-sizing: border-box;
@@ -338,35 +339,11 @@ input[type="submit"]:active {
     width: 100%;
 	height: 100%;
     background: rgba(0, 0, 0, 0.6);
-	z-index: 1000;
 	animation: fadeIn .5s both;
 }
 
 .modal-hidden {
 	display: none;
-}
-
-.modal[aria-hidden="true"] {
-	animation-name: fadeOut;
-}
-
-.modal-wrapper1 {
-	display: flex;
-	flex-direction: column;
-    align-items: center;
-    overflow: auto;
-    width: 600px;
-	height: 700px;
-    max-width: calc(100vw - 20px);
-    max-height: calc(100vh - 20px);
-    padding: 30px;
-    background-color: #fff;
-	border-radius: 15px;
-	animation: slideFromTop .5s both;
-}
-
-.modal[aria-hidden="true"] .modal-wrapper1 {
-	animation-name: slideToBottom;
 }
 
 @keyframes fadeIn {
@@ -389,15 +366,38 @@ input[type="submit"]:active {
 	to { transform: translateY(50px); }
 }
 
-#titlemodal {
-	font-family: 'Work Sans';
-	font-size: 30px;
-	padding-top: 20px;
-	padding-bottom: 20px;
+.modal[aria-hidden="true"] {
+	animation-name: fadeOut;
+}
+
+.modal[aria-hidden="true"] .modal-wrapper1 {
+	animation-name: slideToBottom;
+}
+
+/* modal-wrapper1 = suppression de travaux */
+
+.modal-wrapper1 {
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+    width: 600px;
+	height: 700px;
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+    padding: 30px;
+    background-color: #fff;
+	border-radius: 15px;
+	animation: slideFromTop .5s both;
+}
+
+.wrappper1Icons {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row-reverse;
+	width: 100%;
 }
 
 .js-modal-close {
-	align-self: flex-end;
 	background-color: white;
 	cursor: pointer;
 }
@@ -412,6 +412,13 @@ input[type="submit"]:active {
 
 .js-modal-close span {
 	display: none;
+}
+
+.titlemodal {
+	font-family: 'Work Sans';
+	font-size: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 .modal-gallery {
@@ -464,4 +471,145 @@ input[type="submit"]:active {
 	color: white;
 	background-color: black;
     display: block;
+}
+
+.modal-wrapper1 hr {
+    width: 82%;
+} 
+
+.goto-wrapper2 {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 200px;
+	height: 40px;
+	min-height: 40px;
+	max-height: 40px;
+	text-align: center;
+	border-radius: 60px ;
+	border: none;
+	cursor: pointer;
+}
+
+.goto-wrapper2:hover {
+	opacity: 0.8;
+}
+
+.goto-wrapper2:active {
+	opacity: 0.5;
+}
+
+/* modal-wrapper2 = ajout de travaux */
+
+.goto-wrapper1 {
+	background-color: white;
+	cursor: pointer;
+}
+
+.goto-wrapper1:hover {
+	opacity: 0.8;
+}
+
+.goto-wrapper1:active {
+	opacity: 0.5;
+}
+
+.goto-wrapper1 span {
+	display: none;
+}
+
+#formAjout {
+	margin-top: 30px;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%; 
+}
+
+.ajout-photo {
+	background-color: #E8F1F6;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 420px;
+	height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	margin-bottom: 10px;
+}
+
+.fa-image {
+	font-size: 80px;
+	color: #B9C5CC;
+}
+
+#btn-upload {
+	background-color: #CBD6DC;
+    color: #306685;
+    padding: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+	border: 1px solid red;
+	border: none;
+	margin: 15px 0;
+	font-size: 16px;
+	font-weight: 600;
+	padding: 15px 30px;
+}
+
+.ajout-photo p {
+	font-size: 10px;
+}
+
+#previewImg {
+	width: 100%;
+	height: auto;
+    object-fit: contain;
+	max-height: 100%;
+}
+
+#formAjout label {
+    width: 100%; 
+    text-align: left;
+	font-size: 100%;
+	font: inherit;
+	padding-top: 10px;
+}
+
+#titreImg, #choixCategorie {
+	height: 50px;
+	font: inherit;
+	font-size: 1em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	width: 100%;
+    margin: 10px 0;
+}
+
+#formAjout hr {
+	margin-top: 20px;
+	width: 100%;
+}
+
+#inputValider {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #A7A7A7;
+	margin : 2em auto ;
+	text-align: center;
+	border-radius: 60px ;
+	cursor: pointer;
+	width: 200px;
+	height: 40px;
+	min-height: 40px;
+	max-height: 40px;
+	border: none;
+}
+
+#inputValider:hover {
+	background-color: #1D6154;
 }
