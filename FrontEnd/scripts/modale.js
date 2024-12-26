@@ -3,6 +3,7 @@
 
 async function modeEdition() {
 
+    const token = sessionStorage.getItem("token");
     const response = await fetch('http://localhost:5678/api/works');
     const getworks = await response.json();
 
