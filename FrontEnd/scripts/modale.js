@@ -120,13 +120,16 @@ async function modeEdition() {
                 }
 
                 // mise à jour affichage
-                document.querySelector(`#work-${figureDeleteId}`)?.remove();
-                const updateTravaux = getworks.filter(work => work.id != figureDeleteId);
-                worksJS.afficherImages(updateTravaux, ".modal-gallery");
-                worksJS.afficherImages(updateTravaux, ".gallery");
+                const index = getworks.findIndex(work => work.id === parseInt(figureDeleteId));
+                if (index !== -1) {
+                    getworks.splice(index, 1); // supprime de la liste l'élément correspondant à figureDeleteId
+                }
+
+                worksJS.afficherImages(getworks, ".modal-gallery");
+                worksJS.afficherImages(getworks, ".gallery");
                 
                 // reset événement de suppression
-                attacherEvenementsSuppression(updateTravaux); 
+                attacherEvenementsSuppression(getworks);
 
             } catch (error) {
                 console.error("Erreur :", error);
