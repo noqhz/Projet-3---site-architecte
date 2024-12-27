@@ -388,6 +388,8 @@ footer nav ul {
     background-color: #fff;
 	border-radius: 15px;
 	animation: slideFromTop .5s both;
+	overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .wrappper1Icons {

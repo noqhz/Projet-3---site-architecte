@@ -172,29 +172,25 @@ async function modeEdition() {
 
             const file = fileInput.files[0];
             let titre = titreInput.value;
-            const categorie = categorieInput.value;
+            const categorie = categorieInput.value;     
 
-            if (!file || !titre || !categorie) {
+            // message d'erreur au clic sur le bouton Valider si le formulaire n'est pas complet
+            const verifierChamps= document.getElementById("inputValider");
+            verifierChamps.addEventListener("click", () => {
                 let messageErreur = document.querySelector(".error-message");
-                if (!messageErreur) { // si messageErreur existe, son contenu est mis à jour
+                if (messageErreur) {
+                    messageErreur.remove();
+                }
+
+                if (!file || !titre || !categorie) {
                     messageErreur = document.createElement("p");
                     messageErreur.classList.add("error-message");
+                    messageErreur.textContent = "Veuillez remplir tous les champs";
+                    messageErreur.style.display = "block";
                     const wrapper2HR = document.querySelector("form hr");
                     wrapper2HR.after(messageErreur);
                 }
-                messageErreur.textContent = "Veuillez remplir tous les champs";
-                messageErreur.style.display = "block";
-                return;
-            }
-
-            messageErreur = document.querySelector(".error-message");
-            if (messageErreur) {
-                messageErreur.style.display = "none";
-            }
-
-            // regex titre
-            let titreRegex = titre.replace(/[-\d]+/g, " ").trim().replace(/\b\w/g, (char) => char.toUpperCase());
-            titre = titreRegex;
+            });
 
             // préparation des données pour l'envoi
             const formData = new FormData();
@@ -202,6 +198,9 @@ async function modeEdition() {
             formData.append("title", titre);
             formData.append("category", parseInt(categorie));
 
+            if (file && titre && categorie) {
+            let messageErreur = document.querySelector(".error-message");
+            messageErreur.style.display = "none"; // suppression du message d'erreur
             try {
                 const response = await fetch("http://localhost:5678/api/works", {
                     method: "POST",
@@ -227,6 +226,7 @@ async function modeEdition() {
                     wrapper2Icon.style.display = "block";
                     uploadPhoto.style.display = "block";
                     descPhoto.style.display = "block";
+                    attacherEvenementsSuppression(getworks);
                 } else {
                     const errorData = await response.json();
                     console.error("Erreur lors de l'ajout :", errorData);
@@ -236,7 +236,7 @@ async function modeEdition() {
                 console.error("Erreur :", error);
                 alert("Une erreur est survenue. Veuillez réessayer.");
             }
-
+        }
         });
     }
 }
@@ -396,6 +396,7 @@ function modaleHtml() {
     inputPhoto.style.display = "none";
 
     // switch modal-wrapper1 à modal-wrapper2
+    function modaleAjoutTravaux() {
     const gotowrapper2 = document.querySelector(".goto-wrapper2");
     gotowrapper2.addEventListener("click", function () {
            wrapper1GalleryDiv.style.display = "none";
@@ -405,10 +406,14 @@ function modaleHtml() {
            wrapper2Form.style.display = null;
            wrapper2Retour.style.display = null;
            });
+    }
+    modaleAjoutTravaux();
 
     // switch modal-wrapper2 à modal-wrapper1
-    const gotowrapper1 = document.querySelector(".goto-wrapper1");
-    gotowrapper1.addEventListener("click", function () {
+    function modaleSuppressionTravaux() {
+    const gotowrapper1 = document.querySelectorAll(".goto-wrapper1, .lien-modale");
+    gotowrapper1.forEach((selector) => {
+        selector.addEventListener("click", function () {
            wrapper1GalleryDiv.style.display = null;
            wrapper1HR.style.display = null;
            wrapper1Button.style.display = null;
@@ -416,6 +421,9 @@ function modaleHtml() {
            wrapper2Form.style.display = "none";
            wrapper2Retour.style.display = "none";
            });
+        });
+    }
+    modaleSuppressionTravaux();
 
     // événement bouton upload = ouverture du input type="file"
     document.getElementById("btn-upload").addEventListener("click", function() {
